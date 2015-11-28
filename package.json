@@ -1,0 +1,19 @@
+{
+  "name": "youtube_grabber",
+  "version": "0.0.1",
+  "description": "Simple node script to download a set of videos from youtube. This simply implements the Youtube-dl npm package and loops over a list of videos and saves them",
+  "main": "grabber.js",
+  "dependencies": {
+    "youtube-dl": "^1.10.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "youtube"
+  ],
+  "author": "StevenMcD",
+  "license": "ISC"
+}
