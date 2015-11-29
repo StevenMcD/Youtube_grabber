@@ -1,13 +1,15 @@
-var fs = require('fs');
-var youtubedl = require('youtube-dl');
+'use strict';
 
-var videoUrls = [
-    'https://www.youtube.com/watch?v=fLlItGWiVFc&index=1&list=PLWbHc_FXPo2jBXpr1IjyUgJ7hNS1eTf7H',
-    'https://www.youtube.com/watch?v=nbpZRm9gl50&index=2&list=PLWbHc_FXPo2jBXpr1IjyUgJ7hNS1eTf7H'
+let fs = require('fs');
+let youtubedl = require('youtube-dl');
+
+let videoUrls = [
+    'https://www.youtube.com/watch?v=7V7zLrlX-T0',
+    'https://www.youtube.com/watch?v=db4wXnvBbPc'
 ];
 
 function processNextVideo(){
-    var videoUrl = videoUrls.shift();
+    let videoUrl = videoUrls.shift();
     if(videoUrl){
         downloadVideo(videoUrl);
     }
@@ -18,10 +20,10 @@ function downloadVideo(videoUrl){
     youtubedl.getInfo(videoUrl, [], function(err, info) {
         if (err) throw err;
 
-        var videoTitleWithoutEscapes = info.title.replace(/\//g, '-');
+        let videoTitleWithoutEscapes = info.title.replace(/\//g, '-');
         console.log('title:', videoTitleWithoutEscapes);
 
-        var video = youtubedl(videoUrl,
+        let video = youtubedl(videoUrl,
                               ['--format=18'],
                               { cwd: __dirname });
 
