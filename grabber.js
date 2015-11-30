@@ -23,25 +23,24 @@ function downloadVideo(videoUrl){
         let videoTitleWithoutEscapes = info.title.replace(/\//g, '-');
         console.log('title:', videoTitleWithoutEscapes);
 
-        let video = youtubedl(videoUrl,
-                              ['--format=18'],
-                              { cwd: __dirname });
-
-        // Will be called when the download starts.
-        video.on('info', function(info) {
-            console.log('Download started');
-            console.log('size: ' + info.size);
-            console.log('--------------------');
-        });
-
+        let video = youtubedl(videoUrl, ['--format=18'], { cwd: __dirname });
+        video.on('info', logVideoInformation);
         video.pipe(fs.createWriteStream(videoTitleWithoutEscapes + '.mp4'));
-        video.on('end', function(a, b, c){
-            console.log('NEXT VIDEO PLEASE!');
-            console.log('--------------------');
-            processNextVideo();
-        })
+        video.on('end', onVideoEnd);
     });
 
+};
+
+function logVideoInformation(videoInfo){
+    console.log('Download started');
+    console.log('size: ' + videoInfo.size);
+    console.log('--------------------');
+};
+
+function onVideoEnd() {
+    console.log('NEXT VIDEO PLEASE!');
+    console.log('--------------------');
+    processNextVideo();
 };
 
 processNextVideo();
