@@ -1,0 +1,10 @@
+class Video {
+
+  constructor(videoUrl){
+    this.url = videoUrl;
+  }
+
+  download(){
+    console.log('This function will download the video to the specified location');
+  }
+}
