@@ -6,7 +6,9 @@
   "dependencies": {
     "youtube-dl": "^1.10.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.18"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
