@@ -1,10 +1,20 @@
 class Video {
 
-  constructor(videoUrl){
-    this.url = videoUrl;
-  }
+    const youtubedl = require('youtube-dl');
 
-  download(){
-    console.log('This function will download the video to the specified location');
-  }
+    constructor(videoUrl){
+        this.url = videoUrl;
+    }
+
+    download(){
+        youtubedl.getInfo(videoUrl, [], function(err, info) {
+            if (err) throw err;
+
+            let videoTitleWithoutEscapes = info.title.replace(/\//g, '-');
+            console.log('title:', videoTitleWithoutEscapes);
+
+            let video = youtubedl(videoUrl, ['--format=18'], { cwd: __dirname });
+            video.pipe(fs.createWriteStream(videoTitleWithoutEscapes + '.mp4'));
+        });
+    }
 }
